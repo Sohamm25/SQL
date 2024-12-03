@@ -1,1 +1,127 @@
-#GG
+# started qith my sql and here i am after 5 days
+create database emp;
+use emp;
+create table employees(
+employee_id int primary key,
+first_name varchar(50),
+last_name varchar(50),
+department_id int,
+hire_date date
+);
+create table salaries(
+employee_id int ,
+salary float,
+effective_date date
+);
+create table managers(
+manager_id int,
+first_name varchar(50),
+last_name varchar(50),
+department_id int
+);
+create table departments(
+department_id int,
+department_name varchar(50)
+);
+INSERT INTO employees (employee_id, first_name, last_name, department_id, hire_date) VALUES
+(1, 'John', 'Smith', 101, '2020-03-15'),
+(2, 'Jane', 'Doe', 102, '2019-06-20'),
+(3, 'Michael', 'Brown', 101, '2021-09-10'),
+(4, 'Emily', 'Davis', 103, '2018-11-03'),
+(5, 'Chris', 'Wilson', 104, '2022-01-25'),
+(6, 'Pat', 'Taylor', 105, '2017-05-14'),
+(7, 'Alex', 'Johnson', 106, '2023-02-18'),
+(8, 'Sam', 'White', 103, '2020-08-30'),
+(9, 'Jordan', 'Martinez', 107, '2019-12-22'),
+(10, 'Morgan', 'Garcia', 104, '2021-04-11'),
+(11, 'Casey', 'Lee', 105, '2022-07-09'),
+(12, 'Kim', 'Thomas', 108, '2021-05-19'),
+(13, 'Drew', 'Harris', 102, '2020-10-27'),
+(14, 'Taylor', 'Clark', 101, '2023-06-06'),
+(15, 'Shawn', 'Robinson', 106, '2018-02-17');
+INSERT INTO salaries (employee_id, salary, effective_date) VALUES
+(1, 60000, '2023-01-01'),
+(2, 75000, '2023-01-01'),
+(3, 55000, '2022-12-15'),
+(4, 80000, '2022-11-01'),
+(5, 50000, '2023-02-10'),
+(6, 65000, '2023-03-20'),
+(7, 70000, '2023-01-25'),
+(8, 62000, '2023-02-18'),
+(9, 58000, '2023-04-15'),
+(10, 69000, '2023-05-01'),
+(11, 72000, '2023-06-10'),
+(12, 76000, '2023-01-31'),
+(13, 54000, '2022-09-20'),
+(14, 67000, '2023-08-01'),
+(15, 81000, '2023-07-10');
+INSERT INTO managers (manager_id, first_name, last_name, department_id) VALUES
+(201, 'Anna', 'Adams', 101),
+(202, 'Brian', 'Miller', 102),
+(203, 'Carla', 'Moore', 103),
+(204, 'David', 'Anderson', 104),
+(205, 'Elena', 'Scott', 105),
+(206, 'Frank', 'Evans', 106),
+(207, 'Grace', 'Hughes', 107),
+(208, 'Harry', 'Perry', 108),
+(209, 'Ivy', 'Long', 101),
+(210, 'Jack', 'Reed', 102),
+(211, 'Kara', 'Baker', 103),
+(212, 'Leo', 'Brooks', 104),
+(213, 'Mia', 'Gray', 105),
+(214, 'Nina', 'Diaz', 106),
+(215, 'Oscar', 'Cruz', 107);
+INSERT INTO departments (department_id, department_name) VALUES
+(101, 'Sales'),
+(102, 'Marketing'),
+(103, 'Human Resources'),
+(104, 'Finance'),
+(105, 'IT'),
+(106, 'Operations'),
+(107, 'Customer Support'),
+(108, 'R&D'),
+(109, 'Logistics'),
+(110, 'Procurement'),
+(111, 'Legal'),
+(112, 'Production'),
+(113, 'Administration'),
+(114, 'Quality Assurance'),
+(115, 'Training');
+
+
+-- 1
+select e.first_name, e.last_name, d.department_name
+from employees as e inner join departments as d
+on e.department_id = d.department_id;
+
+-- 2
+select e.first_name, e.last_name, d.department_name
+from employees as e inner join departments as d
+on e.department_id = d.department_id where d.department_name = "Sales";
+
+-- 3
+select e.first_name, e.last_name, s.salary
+from employees as e inner join salaries as s
+on e.employee_id = s.employee_id;
+
+-- 4
+select e.first_name, e.last_name, s.salary, d.department_name
+from employees as e inner join salaries as s 
+on e.employee_id = s.employee_id inner join departments as d
+on e.department_id = d.department_id
+where d.department_name = "IT";
+
+-- 5
+
+select e.first_name, e.last_name, s.salary, d.department_name
+from employees as e inner join salaries as s 
+on e.employee_id = s.employee_id inner join departments as d
+on e.department_id = d.department_id
+having s.salary > 70000;
+
+-- 6
+
+select e.employee_id, e.first_name, e.last_name, e.hire_date, s.salary
+from employees as e inner join salaries as s
+on e.employee_id = s.employee_id
+order by hire_date DESC;
