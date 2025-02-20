@@ -1,7 +1,7 @@
 -- Create a new database
 CREATE DATABASE SalesManagement;
 
--- Switch to the new database
+-- Switch to the new database 
 USE SalesManagement;
 
 -- Create a Customers table
