@@ -4,7 +4,7 @@ CREATE DATABASE LibraryDB;
 USE LibraryDB;
 
 -- Authors Table
-CREATE TABLE Authors (
+CREATE TABLE Authors ( 
     AuthorID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
     Country VARCHAR(100)
